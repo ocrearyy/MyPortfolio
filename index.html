@@ -1,0 +1,524 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset=utf8>
+  <meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <style>
+    :root {
+      color-scheme: light;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px)
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px)
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font: 14px -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fff;
+      color: #000
+    }
+
+    img {
+      max-width: 100%
+    }
+
+    [hidden]:not([hidden=until-found i]) {
+      display: none !important
+    }
+  </style>
+</head>
+
+<body>
+  <title>Oshane Creary Portfolio</title>
+  <meta name="claude:viewport-fit-sides" content="cover">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    /* Layout: single column, analyst's notebook. Hero with a query line, then a project index, then contact. */
+    :root {
+      --bg: #f5f7f8;
+      --surface: #ffffff;
+      --ink: #12202b;
+      --muted: #566572;
+      --line: #d9e0e5;
+      --accent: #1f6f8b;
+      --accent-soft: #e2eef3;
+      --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+      --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0f171d;
+        --surface: #16222a;
+        --ink: #e7eef2;
+        --muted: #9aabb7;
+        --line: #26353f;
+        --accent: #6cc0dd;
+        --accent-soft: #183442;
+        color-scheme: dark;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #0f171d;
+      --surface: #16222a;
+      --ink: #e7eef2;
+      --muted: #9aabb7;
+      --line: #26353f;
+      --accent: #6cc0dd;
+      --accent-soft: #183442;
+      color-scheme: dark;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 1rem;
+      line-height: 1.6;
+      padding-left: max(16px, env(safe-area-inset-left, 0px));
+      padding-right: max(16px, env(safe-area-inset-right, 0px));
+    }
+
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    a:focus-visible,
+    .btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    /* Nav */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-block: 24px;
+      flex-wrap: wrap;
+    }
+
+    .mark {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .mark span {
+      color: var(--accent);
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 20px;
+      font-size: 0.92rem;
+    }
+
+    .navlinks a {
+      text-decoration: none;
+      color: var(--muted);
+    }
+
+    .navlinks a:hover {
+      color: var(--ink);
+    }
+
+    /* Hero */
+    header.hero {
+      padding-block: 56px 72px;
+      display: grid;
+      gap: 22px;
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(2.6rem, 8vw, 4.6rem);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      margin: 0;
+      text-wrap: balance;
+    }
+
+    .lede {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 58ch;
+      margin: 0;
+    }
+
+    .query {
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      color: var(--muted);
+      border-left: 2px solid var(--accent);
+      padding: 4px 0 4px 14px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .query b {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      transition: border-color .15s, transform .15s;
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+    }
+
+    /* Projects */
+    section {
+      padding-block: 48px;
+      border-top: 1px solid var(--line);
+    }
+
+    .sec-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.9rem;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+
+    .count {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 0;
+      transition: border-color .15s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+    }
+
+    .tag {
+      align-self: flex-start;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 4px 9px;
+      border-radius: 5px;
+    }
+
+    .card h3 {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 1.35rem;
+      line-height: 1.25;
+      margin: 0;
+      text-wrap: balance;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .meta {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .card .link {
+      margin-top: auto;
+      padding-top: 8px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card .link:hover {
+      text-decoration: underline;
+    }
+
+    /* Contact */
+    .contact p {
+      color: var(--muted);
+      max-width: 55ch;
+      margin: 0 0 20px;
+    }
+
+    .email-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .email {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      padding: 11px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      user-select: all;
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    button.btn {
+      cursor: pointer;
+      font-family: var(--body);
+    }
+
+    .copied {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: var(--accent);
+      min-height: 1.2em;
+    }
+
+    .card.soon {
+      border-style: dashed;
+      background: transparent;
+    }
+
+    .soon-label {
+      margin-top: auto;
+      padding-top: 8px;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .links {
+      margin-top: auto;
+      display: flex;
+      gap: 4px 22px;
+      flex-wrap: wrap;
+    }
+
+    .links .link {
+      margin-top: 0;
+    }
+
+    footer {
+      padding-block: 32px 48px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+
+  <div class="wrap">
+    <nav>
+      <a class="mark" href="#top">oshane<span>.</span>creary</a>
+      <div class="navlinks">
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <header class="hero" id="top">
+      <div class="eyebrow">Business Operations & Process Optimization | Data Analytics & BI | AI Automation</div>
+      <h1>Oshane Creary</h1>
+      <p class="lede">I have experience managing operations, optimizing processes, turning data into clear decisions and
+        automating the manual work in between, so companies cut costs, save time and grow revenue.</p>
+      <!-- <div class="query"><b>SELECT</b> insight <b>FROM</b> data <b>WHERE</b> question <b>IS NOT NULL</b>;</div> -->
+      <div class="actions">
+        <a class="btn primary" href="#work">See my work</a>
+        <a class="btn" href="#contact">Contact me</a>
+      </div>
+    </header>
+
+    <section id="work">
+      <div class="sec-head">
+        <h2>Selected work</h2>
+        <span class="count">6 projects</span>
+      </div>
+      <div class="grid">
+
+        <article class="card">
+          <span class="tag">Data Presentation</span>
+          <h3>From analysis to recommendation</h3>
+          <p>A data story built for decision-makers, with the key findings, supporting visuals and clear next steps.</p>
+          <a class="link" href="https://drive.google.com/file/d/129EdMJI08eDDKIlm8dXJfHeX2cJ3fxoN/view?usp=drivesdk"
+            target="_blank" rel="noopener">View presentation →</a>
+        </article>
+
+        <article class="card">
+          <span class="tag">Data Dashboard</span>
+          <h3>Interactive performance dashboard</h3>
+          <p>An interactive dashboard that tracks key metrics and lets users filter and explore the data for themselves.
+          </p>
+          <span class="meta">Built in Tableau</span>
+          <a class="link"
+            href="https://public.tableau.com/app/profile/oshane.oshane/viz/DashboardPortfolio_17926043521680/Dashboard1"
+            target="_blank" rel="noopener">View dashboard →</a>
+        </article>
+
+        <article class="card">
+          <span class="tag">SQL Project</span>
+          <h3>Hospital database case study</h3>
+          <p>Designed and built a hospital database, then loaded, cleaned and explored data on patients, visits,
+            departments, treatments, diagnoses and payments.</p>
+          <span class="meta">CREATE → LOAD → CLEAN → EXPLORE</span>
+          <a class="link" href="https://github.com/ocrearyy/SQLCaseStudy_Hospital" target="_blank" rel="noopener">View
+            code on GitHub →</a>
+        </article>
+
+        <article class="card">
+          <span class="tag">Strategic Initiative</span>
+          <h3>Data-backed business proposal</h3>
+          <p>A strategic plan grounded in analysis, laying out the opportunity, the approach and the expected impact.
+          </p>
+          <a class="link" href="https://drive.google.com/file/d/1rnfRvebcj2T8N2jVs1WhyPyDojVe1Nih/view?usp=sharing"
+            target="_blank" rel="noopener">View initiative →</a>
+        </article>
+
+        <article class="card">
+          <span class="tag">Process Automation</span>
+          <h3>Business Process Automation</h3>
+          <p>A recurring process redesigned to remove manual steps, save time and reduce errors.</p>
+          <a class="link" href="https://drive.google.com/file/d/1PnX5ULRVYJObHS51Nqu6eNlxpbES8KcT/view?usp=sharing"
+            target="_blank" rel="noopener">View automation →</a>
+        </article>
+
+        <article class="card">
+          <span class="tag">Agentic AI</span>
+          <h3>AI Lead Qualification Agent</h3>
+          <p>Submit the consultation form and an AI agent researches the company, checks it against the target market
+            and rates the lead Great, Okay, Bad or Undetermined. In the back-end it then routes the lead automatically
+            by creating a follow-up task, alerting the team, drafting a reply or logging it to a tracking sheet.</p>
+          <span class="meta">Todoist · Slack · Gmail · Google Sheets</span>
+          <a class="link" href="https://tally.so/r/VpL4xN" target="_blank" rel="noopener">Try the AI agent →</a>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="sec-head">
+        <h2>Let's talk</h2>
+      </div>
+      <p>Open to suitable roles and projects. Email is the best way to reach me.</p>
+      <div class="email-row">
+        <span class="email" id="email">oshanecreary1@gmail.com</span>
+        <button class="btn primary" id="copy" type="button">Copy email</button>
+      </div>
+      <span class="copied" id="copied" aria-live="polite"></span>
+    </section>
+
+    <footer>© 2026 Oshane Creary</footer>
+  </div>
+
+  <script>
+    document.getElementById("copy").addEventListener("click", function () {
+      var t = document.getElementById("email").textContent, msg = document.getElementById("copied");
+      function fallback() {
+        var r = document.createRange(); r.selectNodeContents(document.getElementById("email"));
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        msg.textContent = "Email selected. Press copy on your device.";
+      }
+      try {
+        navigator.clipboard.writeText(t).then(function () { msg.textContent = "Email copied."; }, fallback);
+      } catch (e) { fallback(); }
+    });
+  </script>
+
+</body>
+
+</html>
